@@ -14,7 +14,7 @@ API Gateway の gzip 圧縮動作確認用プロジェクト
 
 ## Test Commands
 
-### Response確認
+### Response Body確認
 
 ```bash
 # text
