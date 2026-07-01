@@ -52,9 +52,9 @@ export class ApiGatewayLambdaCompressionSampleStack extends cdk.Stack {
     const api = new apigateway.RestApi(this, "CompressionTestApi", {
       restApiName: "compression-test-api",
       // Lambda の response body は文字列のみ返却可能なため、バイナリは base64 エンコードして返却する必要がある
-      // API Gateway は Content-Type が binaryMediaTypes にマッチし、かつ isBase64Encoded: true のときに
+      // API Gateway はリクエストの Accept ヘッダーが binaryMediaTypes にマッチし、かつ isBase64Encoded: true のときに
       // response body を base64 デコードしてバイナリとしてクライアントへ返却する
-      // */* により Content-Type を問わず常にマッチさせているが適切に設定しても良い
+      // */* により Accept ヘッダーの値を問わず常にマッチさせているが適切に設定しても良い
       // binaryMediaTypes はリクエスト/レスポンス両方に適用される
       binaryMediaTypes: ["*/*"],
       deployOptions: {
