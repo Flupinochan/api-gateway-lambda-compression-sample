@@ -57,7 +57,7 @@ def handle_binary_response() -> LambdaResponse:
     # gzip圧縮
     compressed: bytes = gzip.compress(payload, compresslevel=6)
     # base64でencode
-    encoded: str = base64.b64encode(compressed).decode("utf-8")
+    encoded: str = base64.b64encode(compressed).decode("ascii")
 
     return {
         "statusCode": 200,
