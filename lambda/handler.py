@@ -12,7 +12,7 @@ LambdaResponse = dict[str, Any]
 
 
 def lambda_handler(event: LambdaEvent, context: Any) -> LambdaResponse:
-    logger.info(json.dumps(event))
+    logger.info(json.dumps(event, ensure_ascii=False))
     path: str = event.get("path", "/")
 
     if path == "/text":
@@ -23,7 +23,7 @@ def lambda_handler(event: LambdaEvent, context: Any) -> LambdaResponse:
     return {
         "statusCode": 404,
         "headers": {"Content-Type": "application/json"},
-        "body": json.dumps({"error": "Not Found"}),
+        "body": json.dumps({"error": "Not Found"}, ensure_ascii=False),
         "isBase64Encoded": False,
     }
 
@@ -35,6 +35,7 @@ def handle_text_response() -> LambdaResponse:
             "encoding": "none",
             "compressed": False,
         },
+        ensure_ascii=False,
     )
     return {
         "statusCode": 200,
@@ -52,6 +53,7 @@ def handle_binary_response() -> LambdaResponse:
             "compressed": True,
             "data": "A" * 1000,
         },
+        ensure_ascii=False,
     ).encode("utf-8")
 
     # gzip圧縮
